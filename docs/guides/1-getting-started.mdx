@@ -27,10 +27,9 @@ LiveKit is published to [docker hub](https://hub.docker.com/r/livekit/livekit-se
 
 ### Building from source
 
-Alternatively, you can build LiveKit on your machine. To do so, there are a few prerequisites:
-
-* Go 1.15+ is installed
-* GOPATH/bin is in your PATH
+Alternatively, you can build LiveKit on your machine. To do so, you must have
+Go 1.16+ installed and available in your `$PATH`. These steps make use of [Go's
+Module system][gomods-explainer].
 
 Then run:
 
@@ -40,6 +39,38 @@ cd livekit-server
 ./bootstrap.sh
 mage
 ```
+
+1. Clone the `livekit-server` repository to your machine and navigate into
+   it:
+
+   ```shell
+   git clone https://github.com/livekit/livekit-server
+   cd livekit-server
+   ```
+
+2. Install [Mage][mage] by cloning it outside of the `livekit-server` repo:
+
+  ```shell
+  git clone https://github.com/magefile/mage
+  cd mage
+  go run bootstrap.go
+  ```
+
+3. Install [Wire][wire]:
+
+  ```shell
+  go get github.com/google/wire/cmd/wire
+  ```
+
+4. And finally, install all the necessary modules for the project:
+
+  ```shell
+  go mod download
+  ```
+
+[gomods-explainer]: https://go.dev/blog/using-go-modules
+[mage]: https://magefile.org/
+[wire]:
 
 ## Generate API key and secret
 
